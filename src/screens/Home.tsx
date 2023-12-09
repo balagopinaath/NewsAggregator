@@ -1,8 +1,10 @@
 //@ts-nocheck
 
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import {Appbar, Chip, Button, useTheme} from 'react-native-paper';
+import {componentNavigationProps, newsData} from '../utils/types';
+import CardItem from '../components/CardItem';
 
 const APIKEY = 'pub_344048d0f070c828dd665dec118a0b238e397';
 const categories = [
@@ -15,7 +17,9 @@ const categories = [
   'Business',
 ];
 
-const Home = () => {
+const Home = (props: ComponentNavigationProps) => {
+  const [newsData, setnewsData] = useState<newsData[]>([]);
+  const [nextPage, setnextPage] = useState('');
   const theme = useTheme();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const handleSelect = (val: string) => {
@@ -30,15 +34,19 @@ const Home = () => {
       selectedCategories.length > 0
         ? `category=${selectedCategories.join()}`
         : ''
-    }`;
+    } ${nextPage.length > 0 ? `&page=${nextPage}` : ''}`;
     try {
-      await fetch(url)
-        .then(res => res.join())
-        .then(data => console.log(data));
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      const data = await response.json();
+      setnewsData(prev => [...prev, ...data.results]);
+      setnextPage(data.nextPage);
     } catch (err) {
       console.log(err);
     }
-    console.log(url);
+    // console.log(Object.keys(newsData[0]));
   };
 
   return (
@@ -72,6 +80,20 @@ const Home = () => {
           Refresh
         </Button>
       </View>
+      <FlatList
+        onEndReached={() => handlePress()}
+        data={newsData}
+        style={styles.flatList}
+        renderItem={({item}) => (
+          <CardItem
+            navigation={props.navigations}
+            description={item.description}
+            image_url={item.image_url}
+            title={item.title}
+            content={item.content}
+          />
+        )}
+      />
     </View>
   );
 };
@@ -95,5 +117,9 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     padding: 0,
     maxHeight: 40,
+  },
+  flatList: {
+    flex: 1,
+    height: 'auto',
   },
 });

@@ -7,17 +7,22 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Favourite from '../screens/Favourite';
 
-const Stack = createNativeStackNavigator();
-const BottomTabs = createBottomTabNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  Favourite: undefined;
+};
 
-function HomeScreen() {
+const Stack = createNativeStackNavigator();
+const BottomTabs = createBottomTabNavigator<RootStackParamList>();
+
+const HomeScreen = () => {
   return (
     <BottomTabs.Navigator screenOptions={{headerShown: false}}>
       <BottomTabs.Screen name="Home" component={Home} />
       <BottomTabs.Screen name="Favourite" component={Favourite} />
     </BottomTabs.Navigator>
   );
-}
+};
 
 const Navigator = () => {
   return (
