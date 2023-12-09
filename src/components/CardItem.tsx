@@ -1,6 +1,6 @@
-import {Alert, Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {Avatar, Button, Card, Text, useTheme} from 'react-native-paper';
+import {Button, Card, Text, useTheme} from 'react-native-paper';
 import {newsData} from '../utils/types';
 import {NavigationProp, Route, RouteProp} from '@react-navigation/native';
 import NewsOverview from '../screens/NewsOverview';
@@ -17,16 +17,18 @@ type RootStackParamList = {
 };
 
 type Props = {
-  navigation: NavigationProp<RootStackParamList>;
-  route: RouteProp<RootStackParamList, 'NewsOverview'>;
   title: string;
   description: string;
   content: string;
   image_url: string;
+  navigation: NavigationProp<RootStackParamList>;
+  route: RouteProp<RootStackParamList, 'NewsOverview'>;
+  handleDelete?: (val: string) => void;
 };
 
-const CardItem: React.FC<Props> = props => {
+const CardItem = (props: Props) => {
   const theme = useTheme();
+
   const handlePress = () => {
     props.navigation.navigate('NewsOverview', {
       title: props.title,
@@ -51,9 +53,19 @@ const CardItem: React.FC<Props> = props => {
         />
         <Card.Title
           title={props.title}
-          subtitle={props.description.split('\n')[0]}
+          subtitle={props.description ? props.description.split('\n')[0] : ''}
           titleNumberOfLines={1}
         />
+        {props.handleDelete && (
+          <Card.Actions>
+            <Button
+              onPress={() =>
+                props.handleDelete && props.handleDelete(props.title)
+              }>
+              Delete
+            </Button>
+          </Card.Actions>
+        )}
       </Card>
     </Pressable>
   );
@@ -63,7 +75,7 @@ export default CardItem;
 
 const styles = StyleSheet.create({
   card: {
-    marginLeft: 10,
+    marginVertical: 10,
     marginRight: 10,
   },
 });

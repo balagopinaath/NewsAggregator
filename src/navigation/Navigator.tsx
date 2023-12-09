@@ -6,28 +6,56 @@ import NewsOverview from '../screens/NewsOverview';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Favourite from '../screens/Favourite';
-
-type RootStackParamList = {
-  Home: undefined;
-  Favourite: undefined;
-};
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
-const BottomTabs = createBottomTabNavigator<RootStackParamList>();
+const BottomTabs = createBottomTabNavigator();
 
-const HomeScreen = () => {
+function HomeScreen() {
   return (
     <BottomTabs.Navigator screenOptions={{headerShown: false}}>
-      <BottomTabs.Screen name="Home" component={Home} />
-      <BottomTabs.Screen name="Favourite" component={Favourite} />
+      <BottomTabs.Screen
+        options={{
+          tabBarIcon(props) {
+            return (
+              <Icon
+                style={{fontSize: 18}}
+                name={props.focused ? 'home-circle' : 'home-circle-outline'}
+                {...props}
+              />
+            );
+          },
+        }}
+        name="Home"
+        component={Home}
+      />
+      <BottomTabs.Screen
+        options={{
+          tabBarIcon(props) {
+            return (
+              <Icon
+                style={{fontSize: 18}}
+                name={
+                  props.focused
+                    ? 'content-save-all'
+                    : 'content-save-all-outline'
+                }
+                {...props}
+              />
+            );
+          },
+        }}
+        name="Favourite"
+        component={Favourite}
+      />
     </BottomTabs.Navigator>
   );
-};
+}
 
-const Navigator = () => {
+function Navigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen">
+      <Stack.Navigator>
         <Stack.Screen
           options={{headerShown: false}}
           name="HomeScreen"
@@ -38,6 +66,6 @@ const Navigator = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}
 
 export default Navigator;

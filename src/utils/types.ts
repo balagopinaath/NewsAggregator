@@ -6,21 +6,21 @@ type RootStackParamList = {
 };
 
 export type newsData = {
-  article_id: String;
-  title: String;
-  link: String;
-  keywords: String[];
-  creator: String;
-  video_url: String;
-  description: String;
-  content: String;
-  pubDate: String;
-  image_url: String;
-  source_id: String;
-  source_priority: String;
-  country: String;
-  category: String[];
-  language: String;
+  article_id: string;
+  title: string;
+  link: string;
+  keywords: string[];
+  creator: string;
+  video_url: string;
+  description: string;
+  content: string;
+  pubDate: string;
+  image_url: string;
+  source_id: string;
+  source_priority: string;
+  country: string;
+  category: string[];
+  language: string;
 };
 
 export type ComponentNavigationProps = {
