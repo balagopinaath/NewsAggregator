@@ -62,8 +62,8 @@ const Home = (props: ComponentNavigationProps) => {
 
   return (
     <View style={styles.container}>
-      <Appbar.Header>
-        <Appbar.Content title="Home"></Appbar.Content>
+      <Appbar.Header style={{marginLeft: 'auto', marginRight: 'auto'}}>
+        <Appbar.Content title="NewsFeed"></Appbar.Content>
       </Appbar.Header>
       <View style={styles.filterContainer}>
         {categories.map(cat => (
@@ -88,7 +88,7 @@ const Home = (props: ComponentNavigationProps) => {
           mode="contained-tonal"
           icon={'sync'}
           onPress={handlePress}>
-          Refresh
+          Fetch
         </Button>
       </View>
       <ProgressBar

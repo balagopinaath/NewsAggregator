@@ -13,6 +13,7 @@ type RootStackParamList = {
     description: string;
     content: string;
     image_url: string;
+    navigation?: any;
   };
 };
 

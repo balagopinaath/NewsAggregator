@@ -4,6 +4,7 @@ import {Button} from 'react-native-paper';
 import {ComponentNavigationProps, newsData} from '../utils/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Details from '../components/Details';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const getData = async () => {
   try {
@@ -39,7 +40,9 @@ const storeData = async (value: newsData) => {
   }
 };
 
-const NewsOverview = (props: ComponentNavigationProps) => {
+const NewsOverview: React.FC<ComponentNavigationProps> = (
+  props: ComponentNavigationProps,
+) => {
   const {title, content, image_url} = props?.route
     ?.params as unknown as newsData;
 

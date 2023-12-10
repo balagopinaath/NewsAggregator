@@ -11,6 +11,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
+type RootStackParamList = {
+  HomeScreen: undefined;
+  NewsOverview: undefined;
+  Favourite: undefined;
+};
+
 function HomeScreen() {
   return (
     <BottomTabs.Navigator screenOptions={{headerShown: false}}>
@@ -20,7 +26,7 @@ function HomeScreen() {
             return (
               <Icon
                 style={{fontSize: 18}}
-                name={props.focused ? 'home-circle' : 'home-circle-outline'}
+                name={props.focused ? 'newspaper-circle' : 'newspaper-outline'}
                 {...props}
               />
             );
@@ -35,37 +41,35 @@ function HomeScreen() {
             return (
               <Icon
                 style={{fontSize: 18}}
-                name={
-                  props.focused
-                    ? 'content-save-all'
-                    : 'content-save-all-outline'
-                }
+                name={props.focused ? 'cards-heart' : 'cards-heart-outline'}
                 {...props}
               />
             );
           },
         }}
         name="Favourite"
-        component={Favourite}
+        component={(props: any) => <Favourite {...props} />}
       />
     </BottomTabs.Navigator>
   );
 }
 
-function Navigator() {
+const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           options={{headerShown: false}}
           name="HomeScreen"
-          component={HomeScreen}></Stack.Screen>
+          component={HomeScreen}
+        />
         <Stack.Screen
           name="NewsOverview"
-          component={NewsOverview}></Stack.Screen>
+          component={(props: any) => <NewsOverview {...props} />}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default Navigator;
