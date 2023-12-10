@@ -1,9 +1,9 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Screen Shots
-<img src="https://github.com/balagopinaath/NewsAggregator/assets/41693256/27515e41-b92f-467e-8e0d-abb0aca9e5e3" width="150" height="150"/>
-<img src="https://github.com/balagopinaath/NewsAggregator/assets/41693256/c02af48b-21c7-4319-9412-6d7322af9be7" width="150" height="150"/>
-<img src="https://github.com/balagopinaath/NewsAggregator/assets/41693256/4d227b89-d2f8-4fd9-90dc-41d80837b4b5" width="150" height="150"/>
+<img src="https://github.com/balagopinaath/NewsAggregator/assets/41693256/27515e41-b92f-467e-8e0d-abb0aca9e5e3" width="250" height="250"/>
+<img src="https://github.com/balagopinaath/NewsAggregator/assets/41693256/c02af48b-21c7-4319-9412-6d7322af9be7" width="250" height="250"/>
+<img src="https://github.com/balagopinaath/NewsAggregator/assets/41693256/4d227b89-d2f8-4fd9-90dc-41d80837b4b5" width="250" height="250"/>
 
 # Getting Started
 
